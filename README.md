@@ -1,4 +1,4 @@
-# llm-zoomcamp-project1
+# Primal Insight
 
 ## Overview
 The objective of this project is to develop a Language Learning Model (LLM) that leverages the latest conversations from the "Primal Diet" Telegram group over the last three months. The model is designed to provide tailored advice and insights related to the Primal Diet, enhancing adherence and understanding for both new and existing followers of this dietary regimen.
