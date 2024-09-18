@@ -1,5 +1,5 @@
 # Primal Insight
-<img src="images/Primal_Diet_App_Interface.jpeg alt="Employee data" title="project front page">
+<img src="heathly_lifestyle/images/Primal_Diet_App_Interface.jpeg alt="Employee data" title="project front page">
 ## Overview
 The objective of this project is to develop a Language Learning Model (LLM) that leverages the latest conversations from the "Primal Diet" Telegram group over the last three months. The model is designed to provide tailored advice and insights related to the Primal Diet, enhancing adherence and understanding for both new and existing followers of this dietary regimen.
 
