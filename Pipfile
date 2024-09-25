@@ -17,6 +17,9 @@ torch = "*"
 ipywidgets = "*"
 gensim = "*"
 nltk = "*"
+pypdf2 = "*"
+pdf2image = "*"
+pytesseract = "*"
 
 [dev-packages]
 
