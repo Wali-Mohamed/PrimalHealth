@@ -20,6 +20,8 @@ nltk = "*"
 pypdf2 = "*"
 pdf2image = "*"
 pytesseract = "*"
+seaborn = "*"
+spacy = "*"
 
 [dev-packages]
 
