@@ -100,7 +100,7 @@ def rag(query):
 
 
 def main():
-    st.title("Dietary Assistant LLM")
+    st.title("Dietary Assistant LLM by W Mohamed")
     st.write("Ask anything related to your diet and health!")
 
     user_input = st.text_input("Ask your question:")

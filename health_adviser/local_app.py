@@ -75,6 +75,7 @@ def rag(query):
 
 def main():
     st.title("Dietary Assistant LLM")
+    st.write("by W Mohamed")
     st.write("Ask anything related to your diet and health!")
 
     user_input = st.text_input("Ask your question:")
