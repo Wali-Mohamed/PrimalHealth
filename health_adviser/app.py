@@ -7,10 +7,13 @@ from openai import OpenAI
 
 import os
 st.write("Current working directory:", os.getcwd())
+# Construct the full path to the file
+file_path = os.path.join(os.getcwd(), 'semantic_vector_search.pkl')
+st.write(file_path)
 
 
 # load the data
-with open('semantic_vector_search.pkl', 'rb') as file:
+with open(file_path, 'rb') as file:
     loaded_data = pickle.load(file)
 
 item=loaded_data[0]['text_vector']
