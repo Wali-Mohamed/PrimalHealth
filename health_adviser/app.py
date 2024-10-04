@@ -5,12 +5,16 @@ import time
 from elasticsearch import Elasticsearch
 from openai import OpenAI
 
+import os
+st.write("Current working directory:", os.getcwd())
+
+
 # load the data
 with open('semantic_vector_search.pkl', 'rb') as file:
     loaded_data = pickle.load(file)
 
 item=loaded_data[0]['text_vector']
-print(item)
+st.write(item)
 
 client = OpenAI(
     
