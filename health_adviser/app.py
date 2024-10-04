@@ -6,7 +6,7 @@ from elasticsearch import Elasticsearch
 from openai import OpenAI
 
 # load the data
-with open('../data/clean_data/semantic_vector_search.pkl', 'rb') as file:
+with open('semantic_vector_search.pkl', 'rb') as file:
     loaded_data = pickle.load(file)
 
 item=loaded_data[0]['text_vector']
