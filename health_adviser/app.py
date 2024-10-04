@@ -6,10 +6,10 @@ from elasticsearch import Elasticsearch
 from openai import OpenAI
 
 import os
-st.write("Current working directory:", os.getcwd())
+#st.write("Current working directory:", os.getcwd())
 # Construct the full path to the file
 file_path = os.path.join(os.getcwd(), 'data/clean_data/semantic_vector_search.pkl')
-st.write(file_path)
+#st.write(file_path)
 
 
 # load the data
