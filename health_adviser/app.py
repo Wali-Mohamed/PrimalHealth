@@ -1,8 +1,16 @@
 import streamlit as st
+import pickle
 import time
 
 from elasticsearch import Elasticsearch
 from openai import OpenAI
+
+# load the data
+with open('../data/clean_data/semantic_vector_search.pkl', 'rb') as file:
+    loaded_data = pickle.load(file)
+
+item=loaded_data[0]['text_vector']
+print(item)
 
 client = OpenAI(
     
@@ -80,6 +88,7 @@ def rag(query):
     search_results = elastic_search(query)
     prompt = build_prompt(query, search_results)
     answer = llm(prompt)
+    time.sleep(3) # Simulating a delay for the function to work
     return answer
 
 
