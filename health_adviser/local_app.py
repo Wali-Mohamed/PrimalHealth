@@ -8,17 +8,7 @@ client = OpenAI(
     
 )
 
-
-# Connect to the Elasticsearch running in Docker on EC2
-es = Elasticsearch(['http://18.170.222.70:9200'])
-
-# Test connection
-if es.ping():
-    st.success("Connected to Elasticsearch!")
-else:
-    st.error("Could not connect to Elasticsearch.")
-
-
+es_client = Elasticsearch('http://localhost:9200') 
 
 
 def elastic_search(query, index_name ="diet-questions"):
