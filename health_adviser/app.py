@@ -14,10 +14,9 @@ st.write(file_path)
 
 # load the data
 with open(file_path, 'rb') as file:
-    loaded_data = pickle.load(file)
+    documents = pickle.load(file)
 
-item=loaded_data[0]['text_vector']
-st.write(item)
+
 
 client = OpenAI(
     
