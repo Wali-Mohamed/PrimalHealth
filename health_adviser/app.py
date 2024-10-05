@@ -10,7 +10,7 @@ import os
 #st.write("Current working directory:", os.getcwd())
 # Construct the full path to the file
 
-os.chdir(r'C:\Users\user\Documents\LLM Zoomcamp\Project')
+
 st.write(os.getcwd())
 file_path = os.path.join(os.getcwd(), r'data\clean_data\documents.json')
 st.write(file_path)
@@ -39,7 +39,7 @@ def search(query):
         query=query,
         filter_dict={},
         boost_dict=boost,
-        num_results=5
+        num_results=10
     )
 
     return results
@@ -76,7 +76,7 @@ def rag(query):
     search_results = search(query)
     prompt = build_prompt(query, search_results)
     answer = llm(prompt)
-    time.sleep(3) # Simulating a delay for the function to work
+    time.sleep(1) # Simulating a delay for the function to work
     return answer
 
 
