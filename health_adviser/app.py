@@ -1,20 +1,19 @@
 import streamlit as st
 import pickle
+import json
 import time
-
-from elasticsearch import Elasticsearch
+#from elasticsearch import Elasticsearch
 from openai import OpenAI
+import minsearch
 
 import os
 #st.write("Current working directory:", os.getcwd())
 # Construct the full path to the file
-file_path = os.path.join(os.getcwd(), 'data/clean_data/semantic_vector_search.pkl')
-#st.write(file_path)
 
-
-# load the data
-with open(file_path, 'rb') as file:
-    documents = pickle.load(file)
+os.chdir(r'C:\Users\user\Documents\LLM Zoomcamp\Project')
+st.write(os.getcwd())
+file_path = os.path.join(os.getcwd(), r'data\clean_data\documents.json')
+st.write(file_path)
 
 
 
@@ -22,45 +21,28 @@ client = OpenAI(
     
 )
 
+with open(file_path, 'r') as file:
+    documents=json.load(file)
+st.write(documents[0])
 
-# Connect to the Elasticsearch running in Docker on EC2
-es = Elasticsearch(['http://18.170.222.70:9200'])
-
-# Test connection
-if es.ping():
-    st.success("Connected to Elasticsearch!")
-else:
-    st.error("Could not connect to Elasticsearch.")
-
-
-
-
-def elastic_search(query, index_name ="diet-questions"):
-    search_query = {
-        "size": 5,
-        "query": {
-            "bool": {
-                "must": {
-                    "multi_match": {
-                        "query": query,
-                        "fields": ["Chunked_Content"],
-                        "type": "best_fields"
-                    }
-                },
-                
-            }
-        }
+index = minsearch.Index(
+    text_fields=['Chunked_Content'],
+    keyword_fields=[]
+)
+index.fit(documents)
+def search(query):
+    boost = {
+        'Chunked_Content': 1.9366969407339725   
     }
 
-    response = es_client.search(index=index_name, body=search_query)
-    
-    result_docs = []
-    
-    for hit in response['hits']['hits']:
-        result_docs.append(hit['_source'])
-    
-    return result_docs
+    results = index.search(
+        query=query,
+        filter_dict={},
+        boost_dict=boost,
+        num_results=5
+    )
 
+    return results
 
 def build_prompt(query, search_results):
     prompt_template = """
@@ -91,7 +73,7 @@ def llm(prompt):
 
 
 def rag(query):
-    search_results = elastic_search(query)
+    search_results = search(query)
     prompt = build_prompt(query, search_results)
     answer = llm(prompt)
     time.sleep(3) # Simulating a delay for the function to work
