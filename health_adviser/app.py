@@ -11,9 +11,9 @@ import os
 # Construct the full path to the file
 
 
-st.write(os.getcwd())
+
 file_path = os.path.join(os.getcwd(), r'data/clean_data/documents.json')
-st.write(file_path)
+
 
 
 
@@ -23,7 +23,7 @@ client = OpenAI(
 
 with open(file_path, 'r') as file:
     documents=json.load(file)
-st.write(documents[0])
+#st.write(documents[0])
 
 index = minsearch.Index(
     text_fields=['Chunked_Content'],
