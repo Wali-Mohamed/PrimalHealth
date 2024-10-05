@@ -12,7 +12,7 @@ import os
 
 
 st.write(os.getcwd())
-file_path = os.path.join(os.getcwd(), r'data\clean_data\documents.json')
+file_path = os.path.join(os.getcwd(), r'data/clean_data/documents.json')
 st.write(file_path)
 
 
