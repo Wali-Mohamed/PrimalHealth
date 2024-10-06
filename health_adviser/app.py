@@ -1,96 +1,144 @@
 import streamlit as st
-import pickle
-import json
-import time
-#from elasticsearch import Elasticsearch
-from openai import OpenAI
-import minsearch
+from rag import rag
+import base64
 
-import os
-#st.write("Current working directory:", os.getcwd())
-# Construct the full path to the file
-
-
-
-file_path = os.path.join(os.getcwd(), r'data/clean_data/documents.json')
-
-
-
-
-client = OpenAI(
+# Function to set background image using base64
+def set_background(image_file):
+    # Encode the image file to base64
+    with open(image_file, "rb") as image:
+        encoded_string = base64.b64encode(image.read()).decode()
     
-)
-
-with open(file_path, 'r') as file:
-    documents=json.load(file)
-#st.write(documents[0])
-
-index = minsearch.Index(
-    text_fields=['Chunked_Content'],
-    keyword_fields=[]
-)
-index.fit(documents)
-def search(query):
-    boost = {
-        'Chunked_Content': 1.9366969407339725   
-    }
-
-    results = index.search(
-        query=query,
-        filter_dict={},
-        boost_dict=boost,
-        num_results=10
+    # Use the base64 string to set the background
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("data:image/jpeg;base64,{encoded_string}");
+            background-size: cover;
+            background-position:center;
+            filter: brightness(80%);  /* Reduce brightness to 80% */
+        }}
+        .stApp::before {{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.2);  /* Dark overlay (30% opacity) */
+            z-index: -1;
+    }}
+    
+        </style>
+        """,
+        unsafe_allow_html=True
     )
 
-    return results
-
-def build_prompt(query, search_results):
-    prompt_template = """
-You're a primal health adviser. Answer the QUESTION based on the CONTEXT from the FAQ database.
-Use only the facts from the CONTEXT when answering the QUESTION.
-
-QUESTION: {question}
-
-CONTEXT: 
-{context}
-""".strip()
-
-    context = ""
-    
-    for doc in search_results:
-        context = context + f"Chunked_Content: {doc['Chunked_Content']}\n\n"
-    
-    prompt = prompt_template.format(question=query, context=context).strip()
-    return prompt
-
-def llm(prompt):
-    response = client.chat.completions.create(
-        model='gpt-3.5-turbo',
-        messages=[{"role": "user", "content": prompt}]
-    )
-    
-    return response.choices[0].message.content
-
-
-def rag(query):
-    search_results = search(query)
-    prompt = build_prompt(query, search_results)
-    answer = llm(prompt)
-    time.sleep(1) # Simulating a delay for the function to work
-    return answer
-
+set_background('../images/healthy_food.jpg')
 
 def main():
-    st.title("Dietary Assistant LLM by W Mohamed")
-    st.write("Ask anything related to your diet and health!")
+    # Custom CSS for better alignment
+        # Custom CSS for alignment and styling
+    st.markdown("""
+        <style>
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            color: white;  /* Set title color to white */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);  /* Add shadow for visibility */
+            margin-bottom: 10px;
+        }
+        .sub-text {
+            font-size:30px;
+            font-weight:bold;
+            color:white;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family:cursive;
+        }
+        .prompt-text {
+            font-size: 25px;
+            color: #ffffff;  /* Custom color for the text above the input */
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .text-box input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ff9800 !important;  /* Border with orange color */
+            outline:4px solid #00ff00 !important;; /* Add green outline */
+            
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Optional subtle shadow */
+            margin-bottom: 20px;
+            margin-top:20px;
+    }
+    
+        .text-box {
+            display: flex;
+            justify-content: center;
+            height:100px;
+            width: 100%;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        </style>
+        """, unsafe_allow_html=True)
 
-    user_input = st.text_input("Ask your question:")
+    # Title
+    st.markdown("""
+        <div class="title">
+            Primal Health Bot
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Subtitle
+    st.markdown("""
+        <div class="sub-text">
+            By W.M.Mohamed
+        </div>
+    """, unsafe_allow_html=True)
+
+    
+
+    # Display the styled label using st.markdown()
+    st.markdown('<span style="color:white;font-size:20px;">Please ask anything about your primal health</span>', unsafe_allow_html=True)
+
+    # Input field for the user
+    user_input = st.text_input("")  # Empty input box without a placeholder text
 
     if st.button("Ask"):
         with st.spinner('Processing...'):
-            output = rag(user_input)
+            output = rag(user_input)  # Assuming rag() is your processing function
             st.success("Completed!")
-            st.write(output)
+            
+            # Displaying output with white text
+            st.markdown(f"""
+                <div style="color:white;">
+                    {output}
+                </div>
+            """, unsafe_allow_html=True)
+
+        # Asking if the user found it helpful, with white text
+        st.markdown('<span style="color:orange;">Did you find this helpful?</span>', unsafe_allow_html=True)
+
+    
+    # Adding feedback buttons (+1 / -1)
+
+    if st.button("+1"):
+        st.write("Feedback: +1")
+
+    if st.button("-1"):
+        st.write("Feedback: -1")
 
 if __name__ == "__main__":
     main()
+
