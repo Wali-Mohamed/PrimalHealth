@@ -3,6 +3,7 @@
 import time
 from openai import OpenAI
 import minsearch
+import ingest
 import json
 import os
 
@@ -17,14 +18,14 @@ client = OpenAI()
 
 # Initialize the minsearch index
 index = minsearch.Index(
-    text_fields=['Chunked_Content'],
+    text_fields=['content'],
     keyword_fields=[]
 )
 index.fit(documents)
 
 def search(query):
     boost = {
-        'Chunked_Content': 1.9366969407339725
+        'content': 1.9366969407339725
     }
     results = index.search(
         query=query,
@@ -45,7 +46,7 @@ def build_prompt(query, search_results):
     {context}
     """.strip()
 
-    context = "\n".join([f"Chunked_Content: {doc['Chunked_Content']}" for doc in search_results])
+    context = "\n".join([f"content: {doc['content']}" for doc in search_results])
     
     return prompt_template.format(question=query, context=context).strip()
 

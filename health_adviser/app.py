@@ -84,12 +84,7 @@ def main():
             margin-bottom: 20px;
             margin-top: 10px;
             }
-        .input-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
+        
         </style>
         """, unsafe_allow_html=True)
 
@@ -128,7 +123,7 @@ def main():
             """, unsafe_allow_html=True)
 
         # Asking if the user found it helpful, with white text
-        st.markdown('<span style="color:orange;">Did you find this helpful?</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:white;">Did you find this helpful?</span>', unsafe_allow_html=True)
 
     
     # Adding feedback buttons (+1 / -1)
