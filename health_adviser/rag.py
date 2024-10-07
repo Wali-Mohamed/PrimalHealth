@@ -8,7 +8,7 @@ import json
 import os
 
 # Load documents
-file_path = os.path.join(os.getcwd(), r'../data/clean_data/documents.json')
+file_path = os.path.join(os.getcwd(), r'./data/clean_data/documents.json')
 #file_path = os.path.join(os.getcwd(), r'data/clean_data/documents.json')
 with open(file_path, 'r') as file:
     documents = json.load(file)
