@@ -25,11 +25,16 @@ The data comes from a Telegram group where members discuss various aspects of th
 
 Using a Gensim LDA (Latent Dirichlet Allocation) model, we identified key topics discussed within the dataset. These topics reflect the core areas of interest in the Primal Diet community, which include:
 
-1. **General Opinions and Community Interactions**: Members frequently discuss personal opinions and community thoughts on the diet and lifestyle.
-2. **Raw Dairy Products**: Conversations focus on the consumption of raw milk, cheese, butter, and meat, which are staples of the Primal Diet.
-3. **Health Practices and Detox Methods**: Discussions center around the use of natural substances like oils, clay, and coconut, along with detox practices.
-4. **External Resources and References**: The group often shares links to websites, resources, and external information relevant to Primal Diet practices.
-5. **Daily Diet Practices**: Members exchange advice on daily food intake, fat consumption, and the role of specific foods like juice and fat in their diet routines.
+1. **Water Usage**: Discussions about hydration and how people use water in their daily habits.
+
+2. **Diet Preferences**: Focus on various diet approaches, including those advocated by figures like Aajonus Vonderplanitz.
+
+3. **Primal Diet**: Conversations about the Primal diet and influencers like Sv3rige promoting raw food.
+
+4. **Raw Dairy and Meat**: Emphasis on consuming raw milk, meat, and cheese for health benefits.
+
+5. **Raw Food and Health**: Discussion on the impact of raw food, especially meat, on the body and overall health.
+
 
 ### Project Solution
 

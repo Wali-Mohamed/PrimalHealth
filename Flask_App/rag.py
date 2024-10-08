@@ -8,20 +8,18 @@ import json
 import os
 
 # Load documents
-file_path = os.path.join(os.getcwd(), r'./data/clean_data/documents.json')
-#file_path = os.path.join(os.getcwd(), r'data/clean_data/documents.json')
-with open(file_path, 'r') as file:
-    documents = json.load(file)
+# project=os.getenv('Project_Path')
+# file_path = os.path.join(project, r'./data/clean_data/documents.json')
+# print(file_path)
+
+# with open(file_path, 'r') as file:
+#     documents = json.load(file)
 
 # Initialize the OpenAI client
 client = OpenAI()
 
-# Initialize the minsearch index
-index = minsearch.Index(
-    text_fields=['content'],
-    keyword_fields=[]
-)
-index.fit(documents)
+
+index = ingest.load_index()
 
 def search(query):
     boost = {

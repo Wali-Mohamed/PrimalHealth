@@ -34,7 +34,7 @@ def set_background(image_file):
         unsafe_allow_html=True
     )
 
-set_background('./images/healthy_food.jpg')
+set_background('../images/healthy_food.jpg')
 
 def main():
     # Custom CSS for better alignment
