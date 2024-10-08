@@ -2,46 +2,87 @@
 
 ![Alt text](/images/Primal_Diet_App_Interface.jpeg)
 
-## Overview
-The objective of this project is to develop a Language Learning Model (LLM) that leverages the latest conversations from the "Primal Diet" Telegram group over the last three months. The model is designed to provide tailored advice and insights related to the Primal Diet, enhancing adherence and understanding for both new and existing followers of this dietary regimen.
 
-Primal Diet-focused datasets are essential for several reasons, particularly in the context of promoting nutritional health, advancing AI applications in dietetics, and supporting individuals committed to this lifestyle. Here’s why they are crucial:
+### Problem Description
 
-## Training AI Models for Nutritional Guidance
+Primal Insight is a Retrieval-Augmented Generation (RAG) application that helps individuals seeking guidance on the Primal Diet, a dietary approach focused on consuming raw, unprocessed foods. The problem this project addresses is the difficulty in extracting valuable and contextually accurate diet and health advice from large volumes of unstructured online conversations. Information shared within health-focused communities can be overwhelming, and users struggle to find specific, relevant insights in real time.
 
-The datasets derived from real-world interactions within the Primal Diet community are used to train machine learning and natural language processing models. These models are crucial in developing AI systems capable of offering personalized dietary advice, suggesting meal plans, and answering complex nutritional inquiries.
-Supporting Personalized Diet Planning
+This project solves the problem by using machine learning models to analyze and retrieve diet-related insights from extensive Telegram group discussions about the Primal Diet. It provides users with precise and actionable responses based on community conversations, improving accessibility to advice on this niche diet.
 
-In a landscape where dietary needs vary widely, AI-driven systems trained on diverse real-world data can provide individualized recommendations, helping users tailor their diet to their specific health conditions and goals.
-Enhancing Community Engagement and Dietary Adherence
+### Data Description
 
-By providing accurate, accessible, and engaging information about the Primal Diet, these AI tools enhance community engagement. They foster a supportive environment that encourages persistence and adherence, crucial for long-term dietary success.
-Reducing Barriers to Information Access
+The data comes from a Telegram group where members discuss various aspects of the Primal Diet, collected between February 14, 2019, and September 14, 2024. Each conversation is transformed into a structured dataset with fields for timestamp and content. An example of the dataset looks like this:
 
-AI systems capable of interpreting and answering diet-related questions reduce the barrier to accessing nutritional information, making it easier for individuals to make informed decisions about their health.
-Project Overview
-The Primal Diet Advisor is a robust AI application designed to navigate the complexities of the Primal Diet using data from dedicated Telegram group discussions. This model can accurately answer a variety of queries, thereby educating users and aiding in diet adherence.
+|    Date       |    Time  | Content                                                 |
+|---------------|----------|---------------------------------------------------------|
+| 2024-09-14    | 03:15    | are wild animals safe to eat raw?                        |
+| 2024-09-14    | 01:16    | I saw this on eat raw meat channel. I wouldn’t...        |
+| 2024-09-14    | 00:31    | You got vaxxed even after listening to aajonus...        |
+| 2024-09-14    | 08:00    | Is it possible for a detox to last 4 months or...        |
+| 2024-09-14    | 03:50    | What to do with 10L of raw milk that are alrea...        |
 
-## The main use cases include:
+### Topic Analysis
 
-- Providing guidance on daily meal planning specific to the Primal Diet.
-- Offering personalized dietary recommendations based on individual preferences and historical data.
-- Explaining the benefits and scientific backing of various aspects of the Primal Diet.
-- Addressing common challenges and questions faced by followers of the Primal Diet.
-- This project is implemented as part of an initiative to integrate advanced AI capabilities within the dietary and health domains.
+Using a Gensim LDA (Latent Dirichlet Allocation) model, we identified key topics discussed within the dataset. These topics reflect the core areas of interest in the Primal Diet community, which include:
 
-### Dataset
-The dataset is sourced from the latest conversations held on the "Primal Diet" Telegram group, focusing on discussions from the last three months:
+1. **Water Usage**: Discussions about hydration and how people use water in their daily habits.
 
-- Source of Conversations: Telegram group dedicated to the Primal Diet.
-- Content Covered: Daily dietary practices, meal suggestions, personal experiences, and scientific discussions related to the Primal Diet.
-- Language: English.
-- Technologies
-- Python 3.12 for backend and model training.
-- Docker and Docker Compose for containerization and deployment.
-- Elasticsearch for full-text search capabilities.
-- Flask as the API interface to interact with the AI model.
-- Grafana for monitoring system performance and PostgreSQL for database management.
-- OpenAI's GPT model as the foundation for the language model, fine-tuned on the Primal Diet dataset.
-## Conclusion
-The Primal Diet Advisor is set to transform how individuals interact with and adhere to the Primal Diet. By harnessing cutting-edge AI and machine learning technologies, this tool not only facilitates better health outcomes but also fosters a knowledgeable and engaged dietary community.
+2. **Diet Preferences**: Focus on various diet approaches, including those advocated by figures like Aajonus Vonderplanitz.
+
+3. **Primal Diet**: Conversations about the Primal diet and influencers like Sv3rige promoting raw food.
+
+4. **Raw Dairy and Meat**: Emphasis on consuming raw milk, meat, and cheese for health benefits.
+
+5. **Raw Food and Health**: Discussion on the impact of raw food, especially meat, on the body and overall health.
+
+
+### Project Solution
+
+Primal Insight processes these conversations, transforming them into an easily accessible and structured knowledge base. This enables users to retrieve relevant advice on diet and health directly from the community's discussions, making it easier to stay informed and follow the Primal Diet. By filtering out irrelevant content and providing targeted responses, Primal Insight offers a streamlined experience for users seeking guidance on raw and natural food consumption.
+
+# Project Technologies
+
+- **Python 3.12**  
+  For general programming and application logic.
+
+- **Docker and Docker Compose**  
+  Used for containerization and orchestration of services such as PostgreSQL, Flask, Grafana, etc.
+
+- **Beautiful Soup**  
+  For web scraping and parsing HTML data.
+
+- **gensim (LDA)**  
+  Used for topic modeling through Latent Dirichlet Allocation (LDA).
+
+- **NLTK**  
+  Natural Language Toolkit used for various NLP tasks such as tokenization, stemming, and more.
+
+- **tqdm**  
+  A progress bar tool for showing the progress of loops and operations.
+
+- **Minsearch**  
+  Full-text search engine used for efficient information retrieval.
+
+- **LanceDB**  
+  Vector database used for managing embeddings and performing similarity searches.
+
+- **Sentence Transformers Pretrained Model ('multi-qa-MiniLM-L6-cos-v1')**  
+  A transformer-based model for generating sentence embeddings, particularly used for similarity search and question-answering tasks.
+
+- **Flask**  
+  API interface used to expose your application logic and interact with other services.
+
+- **Grafana**  
+  For monitoring your services and visualizing key performance indicators.
+
+- **PostgreSQL**  
+  Backend for Grafana, used to store and retrieve data in a relational format.
+
+- **OpenAI**  
+  Large language model (LLM) integrated for natural language understanding and processing tasks.
+
+
+
+### Disclaimer
+
+This application is for informational purposes only and is not a substitute for professional health advice. Always consult with a qualified healthcare provider before making any significant dietary or health decisions.
