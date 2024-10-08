@@ -3,8 +3,8 @@ import pandas as pd
 
 import minsearch
 
-project=os.getenv('Project_Path')
-DATA_PATH = os.path.join(project, r'./data/clean_data/data_chunked_5s.csv')  # use this line when running locally
+#project=os.getenv('Project_Path')
+#DATA_PATH = os.path.join(project, r'./data/clean_data/data_chunked_5s.csv')  # use this line when running locally
 DATA_PATH = './data/clean_data/data_chunked_5s.csv'    # use this when on cloud
 
 
