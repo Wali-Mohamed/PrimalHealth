@@ -86,38 +86,123 @@ You will all the data used in data folder and it two sub folders: raw and clean.
 Since we use OpenAI, you need to provide the API key:
 
 Install direnv. If you use Ubuntu, run sudo apt install direnv and then direnv hook bash >> ~/.bashrc.
-Copy .envrc_template into .envrc and insert your key there.
+create file name .envrc and insert your key there. Use export openain_api='yourkey'
 For OpenAI, it's recommended to create a new project and use a separate key.
 Run direnv allow to load the key into your environment.
 For dependency management, we use pipenv, so you need to install it:
 
-pip install pipenv
+#### Method 1
+
+pip install requirements
+I used venv environments and therefore you can pip install requirements.txt
 Once installed, you can install the app dependencies:
 
-pipenv install --dev
-Running the application
-Database configuration
+
 Before the application starts for the first time, the database needs to be initialized.
 
-First, run postgres:
+- First, run postgres:
+- change directory
+cd Flask_App
 
-docker-compose up postgres
 Then run the db_prep.py script:
+```
+python db_prep.py
+```
+then 
+```
+python local_app.py
+```
+### Method 2
 
-pipenv shell
-
-cd fitness_assistant
+docker-compose up
 
 export POSTGRES_HOST=localhost
 python db_prep.py
 To check the content of the database, use pgcli (already installed with pipenv):
 ```
-pipenv run pgcli -h localhost -U your_username -d course_assistant -W
+
 ```
 \d conversations;
 And select from this table:
 
 select * from conversations;
+
+
+
+# Application Code Structure
+
+The code for the application is located in the `fitness_assistant` folder:
+
+- **`local_app.py`** - The Flask API, the main entry point to the application.
+- **`local_rag.py`** - The main RAG logic for retrieving the data and building the prompt.
+- **`local_ingest.py`** - Handles loading the data into the knowledge base.
+- **`minsearch.py`** - An in-memory search engine.
+- **`db.py`** - Contains the logic for logging the requests and responses to PostgreSQL.
+- **`db_prep.py`** - Script for initializing the database.
+
+
+### Experiments
+
+For experiments, we use Jupyter notebooks, which are located in the `notebooks` folder.
+
+To start Jupyter, run the following commands:
+
+```bash
+cd notebooks
+you can active the environment where you installed requirements
+
+### Notebooks
+
+We have the following notebooks:
+
+- **`rag-test.ipynb`**: The RAG flow and system evaluation.
+- **`evaluation-data-generation.ipynb`**: Generates the ground truth dataset for retrieval evaluation.
+
+### Retrieval Evaluation
+
+The basic approach — using Minsearch without any boosting — produced the following metrics:
+
+- **Hit rate**: 76%
+- **MRR**: 56%
+
+The improved version (with tuned boosting) gave:
+
+same result with no improvement
+
+#### The Best Boosting Parameters:
+
+```python
+boost = {
+    'content': 1.591310685457374,
+    
+}
+
+### RAG Flow Evaluation
+
+We used the **LLM-as-a-Judge** metric to evaluate the quality of our RAG flow.
+
+For **gpt-3.5-turbo**, in a sample of 200 records, we observed:
+
+- **126 (63%)** RELEVANT
+- **62 (31%)** PARTLY_RELEVANT
+- **12 (6%)** NON_RELEVANT
+
+We also tested **gpt-4o-mini**, and the results were:
+
+- **141 (70.5%)** RELEVANT
+- **51 (25.5%)** PARTLY_RELEVANT
+- **8 (4%)** NON_RELEVANT
+
+The difference between the two models is minimal, so we opted for **gpt-4o-mini**.
+
+I tested **gp 40** but it was lower
+We also tested **gpt-4o-mini**, with lanceDB semanctic vector search and the results were:
+
+- **143 (71.5%)** RELEVANT
+- **54 (27%)** PARTLY_RELEVANT
+- **3 (1.5%)** NON_RELEVANT
+
+
 ### Disclaimer
 
 This application is for informational purposes only and is not a substitute for professional health advice. Always consult with a qualified healthcare provider before making any significant dietary or health decisions.

@@ -15,7 +15,7 @@ services:
   postgres:
     image: postgres:13  # Official Postgres image version
     ports:
-      - "5432:5432"  # Expose Postgres on port 5432
+      - "7777:5432"  # Expose Postgres on port 5432
     environment:
       POSTGRES_DB: primal_health
       POSTGRES_USER: postgres
