@@ -115,11 +115,33 @@ python local_app.py
 ```
 ### Method 2
 
-docker-compose up
 
-export POSTGRES_HOST=localhost
-python db_prep.py
-To check the content of the database, use pgcli:
+#### Step 1: Install Dependencies
+Ensure you're using **Python 3.12**. Install the required dependencies using `pip`:
+
+```bash
+pip install -r requirements.txt
+
+#### Step 2: Setup Environment Variables (if needed)
+If the app requires environment variables, create a .env file in the root directory and add the necessary values:
+
+bash```
+Copy code
+touch .env
+
+Add environment variables like:
+DATABASE_URL=postgres://user:password@localhost/dbname
+
+#### Step 3: Run Docker Compose
+If Docker is used to run services like PostgreSQL or Grafana, start them with Docker Compose:
+
+bash
+Copy code
+docker-compose up --build
+This command builds and runs all the necessary containers.
+
+
+#### To check the content of the database, use pgcli:
 ```
 pgcli -h localhost -p 7777 -U your_username -d primal_health
 
