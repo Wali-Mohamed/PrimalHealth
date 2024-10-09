@@ -41,7 +41,7 @@ Using a Gensim LDA (Latent Dirichlet Allocation) model, we identified key topics
 Primal Insight processes these conversations, transforming them into an easily accessible and structured knowledge base. This enables users to retrieve relevant advice on diet and health directly from the community's discussions, making it easier to stay informed and follow the Primal Diet. By filtering out irrelevant content and providing targeted responses, Primal Insight offers a streamlined experience for users seeking guidance on raw and natural food consumption.
 You will all the data used in data folder and it two sub folders: raw and clean.
 
-# Project Technologies
+### Project Technologies
 
 - **Python 3.12**  
   For general programming and application logic.
