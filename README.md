@@ -207,8 +207,10 @@ I tested **gp 40** but it was lower
 - **3 (1.5%)** NON_RELEVANT
 
 ### Inteface
+You can use the app locally as mentioned in the preparation section or run it on the cloud at:
 
-You can use the app locally 
+[Primal Health App](https://primalhealth-9tdx3mdzvwhzvdgmjshs5t.streamlit.app/)
+
 
 ### Disclaimer
 
