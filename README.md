@@ -102,9 +102,10 @@ Before the application starts for the first time, the database needs to be initi
 
 - First, run postgres:
 - change directory
+```
 cd Flask_App
-
-Then run the db_prep.py script:
+```
+Then run the db_prep.py script to initialize database:
 ```
 python db_prep.py
 ```
@@ -118,8 +119,9 @@ docker-compose up
 
 export POSTGRES_HOST=localhost
 python db_prep.py
-To check the content of the database, use pgcli (already installed with pipenv):
+To check the content of the database, use pgcli:
 ```
+pgcli -h localhost -p 7777 -U your_username -d primal_health
 
 ```
 \d conversations;
@@ -196,13 +198,17 @@ We also tested **gpt-4o-mini**, and the results were:
 
 The difference between the two models is minimal, so we opted for **gpt-4o-mini**.
 
-I tested **gp 40** but it was lower
-We also tested **gpt-4o-mini**, with lanceDB semanctic vector search and the results were:
+I tested **gp 40** but it was lower 
+
+ We also tested **gpt-4o-mini**, with lanceDB semanctic vector search and the results were:
 
 - **143 (71.5%)** RELEVANT
 - **54 (27%)** PARTLY_RELEVANT
 - **3 (1.5%)** NON_RELEVANT
 
+### Inteface
+
+You can use the app locally 
 
 ### Disclaimer
 
