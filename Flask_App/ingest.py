@@ -4,7 +4,7 @@ import pandas as pd
 import minsearch
 
 
-DATA_PATH = './data/data_chunked_5s.csv'    # use this when on cloud
+DATA_PATH = './data/clean_data/data_chunked_5s.csv'    # use this when on cloud
 
 
 
