@@ -3,7 +3,7 @@
 import time
 from openai import OpenAI
 import minsearch
-import ingest
+import local_ingest
 import json
 import os
 
@@ -12,7 +12,7 @@ import os
 client = OpenAI()
 
 
-index = ingest.load_index()
+index = local_ingest.load_index()
 
 def search(query):
     boost = {

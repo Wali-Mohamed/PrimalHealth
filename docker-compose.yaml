@@ -1,0 +1,36 @@
+version: '3.8'  # Compose file version
+
+services:
+  flask_app:
+    build: ./Flask_App  # Path to your Flask app Dockerfile
+    ports:
+      - "5000:5000"  # Expose Flask app on port 5000
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}  # Environment variables passed from your .env file
+    depends_on:
+      - postgres  # Ensures Postgres is up before the Flask app starts
+    volumes:
+      - ./Flask_App:/app  # Syncs the Flask_App directory from your host to the container
+
+  postgres:
+    image: postgres:13  # Official Postgres image version
+    ports:
+      - "5432:5432"  # Expose Postgres on port 5432
+    environment:
+      POSTGRES_DB: primal_health
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # Password from .env file
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persist Postgres data
+
+  grafana:
+    image: grafana/grafana:latest  # Latest Grafana version
+    ports:
+      - "3000:3000"  # Grafana UI available on port 3000
+    depends_on:
+      - postgres  # Waits for Postgres to be up
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}  # Admin password from .env file
+
+volumes:
+  postgres_data:  # Docker volume to store persistent Postgres data

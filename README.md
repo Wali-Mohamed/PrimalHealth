@@ -39,6 +39,7 @@ Using a Gensim LDA (Latent Dirichlet Allocation) model, we identified key topics
 ### Project Solution
 
 Primal Insight processes these conversations, transforming them into an easily accessible and structured knowledge base. This enables users to retrieve relevant advice on diet and health directly from the community's discussions, making it easier to stay informed and follow the Primal Diet. By filtering out irrelevant content and providing targeted responses, Primal Insight offers a streamlined experience for users seeking guidance on raw and natural food consumption.
+You will all the data used in data folder and it two sub folders: raw and clean.
 
 # Project Technologies
 
@@ -81,8 +82,42 @@ Primal Insight processes these conversations, transforming them into an easily a
 - **OpenAI**  
   Large language model (LLM) integrated for natural language understanding and processing tasks.
 
+#### Preparation
+Since we use OpenAI, you need to provide the API key:
 
+Install direnv. If you use Ubuntu, run sudo apt install direnv and then direnv hook bash >> ~/.bashrc.
+Copy .envrc_template into .envrc and insert your key there.
+For OpenAI, it's recommended to create a new project and use a separate key.
+Run direnv allow to load the key into your environment.
+For dependency management, we use pipenv, so you need to install it:
 
+pip install pipenv
+Once installed, you can install the app dependencies:
+
+pipenv install --dev
+Running the application
+Database configuration
+Before the application starts for the first time, the database needs to be initialized.
+
+First, run postgres:
+
+docker-compose up postgres
+Then run the db_prep.py script:
+
+pipenv shell
+
+cd fitness_assistant
+
+export POSTGRES_HOST=localhost
+python db_prep.py
+To check the content of the database, use pgcli (already installed with pipenv):
+```
+pipenv run pgcli -h localhost -U your_username -d course_assistant -W
+```
+\d conversations;
+And select from this table:
+
+select * from conversations;
 ### Disclaimer
 
 This application is for informational purposes only and is not a substitute for professional health advice. Always consult with a qualified healthcare provider before making any significant dietary or health decisions.
