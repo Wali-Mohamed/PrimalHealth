@@ -149,14 +149,14 @@ To start Jupyter, run the following commands:
 
 ```bash
 cd notebooks
+```
 you can active the environment where you installed requirements
 
 ### Notebooks
 
 We have the following notebooks:
 
-- **`rag-test.ipynb`**: The RAG flow and system evaluation.
-- **`evaluation-data-generation.ipynb`**: Generates the ground truth dataset for retrieval evaluation.
+All my notebooks are numbered in order 1, 2,3,4 and 5
 
 ### Retrieval Evaluation
 
@@ -176,6 +176,7 @@ boost = {
     'content': 1.591310685457374,
     
 }
+```
 
 ### RAG Flow Evaluation
 
