@@ -133,7 +133,7 @@ select * from conversations;
 
 # Application Code Structure
 
-The code for the application is located in the `fitness_assistant` folder:
+The code for the application is located in the `primal health bot` folder:
 
 - **`local_app.py`** - The Flask API, the main entry point to the application.
 - **`local_rag.py`** - The main RAG logic for retrieving the data and building the prompt.
