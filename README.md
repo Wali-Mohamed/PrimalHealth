@@ -122,12 +122,14 @@ Ensure you're using **Python 3.12**. Install the required dependencies using `pi
 ```bash
 pip install -r requirements.txt
 
+```
+
 #### Step 2: Setup Environment Variables (if needed)
 If the app requires environment variables, create a .env file in the root directory and add the necessary values:
 
-bash```
-Copy code
+bash```  
 touch .env
+```
 
 Add environment variables like:
 DATABASE_URL=postgres://user:password@localhost/dbname
@@ -135,9 +137,10 @@ DATABASE_URL=postgres://user:password@localhost/dbname
 #### Step 3: Run Docker Compose
 If Docker is used to run services like PostgreSQL or Grafana, start them with Docker Compose:
 
-bash
-Copy code
+bash```
 docker-compose up --build
+```
+
 This command builds and runs all the necessary containers.
 
 
