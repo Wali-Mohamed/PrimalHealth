@@ -1,36 +1,38 @@
-version: '3.8'  # Compose file version
+version: '3.8'  # Adjust if needed
 
 services:
   flask_app:
-    build: ./Flask_App  # Path to your Flask app Dockerfile
+    build:
+      context: .  # Set this to the root directory containing both Flask_App and Dockerfile
+      dockerfile: ./Flask_App/Dockerfile  # Path to the Dockerfile
     ports:
-      - "5000:5000"  # Expose Flask app on port 5000
+      - "5000:5000"
     environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}  # Environment variables passed from your .env file
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     depends_on:
-      - postgres  # Ensures Postgres is up before the Flask app starts
+      - postgres
     volumes:
-      - ./Flask_App:/app  # Syncs the Flask_App directory from your host to the container
+      - ./Flask_App:/app
 
   postgres:
-    image: postgres:13  # Official Postgres image version
+    image: postgres:13
     ports:
-      - "7777:5432"  # Expose Postgres on port 5432
+      - "7777:5432"
     environment:
       POSTGRES_DB: primal_health
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # Password from .env file
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data  # Persist Postgres data
+      - postgres_data:/var/lib/postgresql/data
 
   grafana:
-    image: grafana/grafana:latest  # Latest Grafana version
+    image: grafana/grafana:latest
     ports:
-      - "3000:3000"  # Grafana UI available on port 3000
+      - "3000:3000"
     depends_on:
-      - postgres  # Waits for Postgres to be up
+      - postgres
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}  # Admin password from .env file
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
 
 volumes:
-  postgres_data:  # Docker volume to store persistent Postgres data
+  postgres_data:
