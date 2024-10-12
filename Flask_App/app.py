@@ -87,8 +87,8 @@ if __name__ == "__main__":
     
     # Find an available port dynamically
     port = find_free_port()
-    
+    print(f"Flask is running on port {port}")
     # Run Flask app on the dynamic port
     app.run(host='0.0.0.0', port=port, debug=True)
-    print(f"Flask is running on port {port}")
+    
 
