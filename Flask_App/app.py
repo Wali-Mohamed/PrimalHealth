@@ -67,7 +67,6 @@ def handle_feedback():
     # }
     # return jsonify(result)
 import socket
-import streamlit as st
 
 # Your existing imports and app code...
 
@@ -82,17 +81,14 @@ def find_free_port():
 # Find an available port
 port = find_free_port()
 
-# Your Streamlit app code
-def main():
-    st.title("My Streamlit App")
-    st.write("This app is running on a dynamic port.")
+
 
 if __name__ == "__main__":
-    # Set the Streamlit port dynamically
-    st._config.set_option("server.port", port)
-
-    # Run your main app function
-    main()
-
-
+    
+    # Find an available port dynamically
+    port = find_free_port()
+    
+    # Run Flask app on the dynamic port
+    app.run(host='0.0.0.0', port=port, debug=True)
+    print(f"Flask is running on port {port}")
 
