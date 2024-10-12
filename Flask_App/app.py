@@ -66,8 +66,33 @@ def handle_feedback():
     #     "message": f"Feedback received for conversation {conversation_id}: {feedback}"
     # }
     # return jsonify(result)
+import socket
+import streamlit as st
 
+# Your existing imports and app code...
+
+# Function to find an available port
+def find_free_port():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(('', 0))  # Bind to any available port
+    port = s.getsockname()[1]  # Get the port number
+    s.close()
+    return port
+
+# Find an available port
+port = find_free_port()
+
+# Your Streamlit app code
+def main():
+    st.title("My Streamlit App")
+    st.write("This app is running on a dynamic port.")
 
 if __name__ == "__main__":
-    #app.run(debug=True)
-    app.run(port=3100, debug=True, use_reloader=False)
+    # Set the Streamlit port dynamically
+    st._config.set_option("server.port", port)
+
+    # Run your main app function
+    main()
+
+
+
