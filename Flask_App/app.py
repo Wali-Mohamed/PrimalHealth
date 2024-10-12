@@ -70,4 +70,4 @@ def handle_feedback():
 
 if __name__ == "__main__":
     #app.run(debug=True)
-    app.run(port=1000, debug=True, use_reloader=False)
+    app.run(port=3100, debug=True, use_reloader=False)
