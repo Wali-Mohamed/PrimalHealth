@@ -1,12 +1,22 @@
 import os
 import pandas as pd
-
+from pathlib import Path
 import minsearch
 
-project=os.getenv('Project_Path')
-DATA_PATH = os.path.join(project, r'./data/clean_data/data_chunked_5s.csv')  # use this line when running locally
-# DATA_PATH='./data/data_chunked_5s.csv'
-# print(DATA_PATH)
+# print("Current Working Directory:", os.getcwd())
+# project=os.getenv('Project_Path')
+# base_path=Path(project)
+# DATA_PATH = base_path / 'data' / 'clean_data'/ 'data_chunked_5s.csv'
+
+base_path=Path('/app')
+DATA_PATH = base_path / 'data' / 'data_chunked_5s.csv'
+# Check if the file exists
+if os.path.exists(DATA_PATH):
+    print("File exists:", DATA_PATH)
+else:
+    print("File does not exist:", DATA_PATH)
+
+
 
 
 

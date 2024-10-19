@@ -1,8 +1,9 @@
 import uuid
 import os
 from flask import send_from_directory
+from dotenv import load_dotenv
 
-
+load_dotenv()
 
 from flask import Flask, request, jsonify, render_template
 
@@ -58,6 +59,7 @@ def handle_feedback():
         return jsonify({"error": "Invalid input"}), 400
 
     db.save_feedback(
+        
         conversation_id=conversation_id,
         feedback=feedback,
     )
@@ -68,6 +70,8 @@ def handle_feedback():
     return jsonify(result)
 
 
-if __name__ == "__main__":
-    #app.run(debug=True)
-    app.run(debug=True, use_reloader=True)
+
+   
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, use_reloader=True, debug=True)
+

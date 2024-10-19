@@ -3,6 +3,8 @@ import psycopg2
 from psycopg2.extras import DictCursor
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
+from dotenv import load_dotenv
+load_dotenv()
 
 RUN_TIMEZONE_CHECK = os.getenv('RUN_TIMEZONE_CHECK', '1') == '1'
 
@@ -13,10 +15,13 @@ tz = ZoneInfo(TZ_INFO)
 def get_db_connection():
     return psycopg2.connect(
         host=os.getenv("POSTGRES_HOST", "postgres"),
+        #host=os.getenv("POSTGRES_HOST", "localhost"),
         database=os.getenv("POSTGRES_DB", "primal_health"),
         user=os.getenv("POSTGRES_USER", "postgres"),
-        password=os.getenv("POSTGRES_PASSWORD", "your_password"),
-        port="7777"
+        password=os.getenv("POSTGRES_PASSWORD"),
+        
+        #
+        # port="7777"
     )
 
 
@@ -45,6 +50,7 @@ def init_db():
                 )
             """)
         conn.commit()
+        print('tables created')
     finally:
         conn.close()
 
