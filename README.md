@@ -236,7 +236,7 @@ I tested **gp 40** but it was lower
 ### Inteface
 You can use the app locally as mentioned in the preparation section or run it on the cloud at:
 
-[Primal Health App](https://primalhealth-9tdx3mdzvwhzvdgmjshs5t.streamlit.app/)
+[Primal Health App](https://waleedbinwaleed.pythonanywhere.com/)
 
 
 ### Disclaimer
